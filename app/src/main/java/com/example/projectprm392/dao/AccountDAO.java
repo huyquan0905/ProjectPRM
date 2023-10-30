@@ -19,5 +19,4 @@ public interface AccountDAO {
     @Insert
     void insertAdmin(Account account);
 
-    List<Account> getAllAccounts();
 }

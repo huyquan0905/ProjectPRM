@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.projectprm392.utils.AdminAccountInitializer;
 import com.example.projectprm392.R;
+import com.example.projectprm392.utils.AdminAccountInitializer;
 
 public class SplashActivity extends AppCompatActivity {
 
