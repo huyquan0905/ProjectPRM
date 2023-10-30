@@ -1,10 +1,11 @@
-package com.example.projectprm392;
+package com.example.projectprm392.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectprm392.Database.AccountDatabase;
+import com.example.projectprm392.R;
+import com.example.projectprm392.model.Account;
 
 import java.util.List;
 
@@ -40,17 +43,30 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onBtnLoginClick(View view) {
         String strUsername = edtUsername.getText().toString().trim();
-        String strPasswrod = edtPassword.getText().toString().trim();
-        if (TextUtils.isEmpty(strUsername) || TextUtils.isEmpty(strPasswrod)){
+        String strPassword = edtPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(strUsername) || TextUtils.isEmpty(strPassword)) {
             return;
         }
-        Account account = new Account(strUsername,strPasswrod);
 
-        if (isAccountExist(account)){
-            Toast.makeText(this, "Login successfully.", Toast.LENGTH_SHORT).show();
-        }
-        else
+        Account account = new Account(strUsername, strPassword);
+
+
+        // Kiểm tra xem tài khoản có tồn tại và lấy thông tin của tài khoản
+        List<Account> accounts = AccountDatabase.getInstance(this).accountDAO().checkAccountLogin(account.getUsername(), account.getPassword());
+
+        if (accounts != null && !accounts.isEmpty()) {
+            Account loggedInAccount = accounts.get(0);
+            if ("admin".equals(loggedInAccount.getRole())) {
+                // Đây là một tài khoản admin, thực hiện các hành động của admin ở đây
+                Toast.makeText(this, "Admin login successfully.", Toast.LENGTH_SHORT).show();
+            } else {
+                // Đây là một tài khoản user, thực hiện các hành động của user ở đây
+                Toast.makeText(this, "User login successfully.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
             Toast.makeText(this, "Account does not exist!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean isAccountExist(Account account) {
@@ -65,4 +81,5 @@ public class LoginActivity extends AppCompatActivity {
         bindingView();
         bindingAction();
     }
+
 }

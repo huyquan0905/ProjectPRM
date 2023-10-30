@@ -1,8 +1,10 @@
-package com.example.projectprm392;
+package com.example.projectprm392.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.projectprm392.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,4 +13,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+
 }
