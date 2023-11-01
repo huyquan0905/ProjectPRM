@@ -60,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
             if ("admin".equals(loggedInAccount.getRole())) {
                 // Đây là một tài khoản admin, thực hiện các hành động của admin ở đây
                 Toast.makeText(this, "Admin login successfully.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+                startActivity(intent);
             } else {
                 // Đây là một tài khoản user, thực hiện các hành động của user ở đây
                 Toast.makeText(this, "User login successfully.", Toast.LENGTH_SHORT).show();
