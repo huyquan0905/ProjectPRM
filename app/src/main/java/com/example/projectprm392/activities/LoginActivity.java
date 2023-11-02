@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.projectprm392.Database.AccountDatabase;
 import com.example.projectprm392.R;
 import com.example.projectprm392.model.Account;
+import com.example.projectprm392.utils.AdminAccountInitializer;
 
 import java.util.List;
 
@@ -58,12 +59,10 @@ public class LoginActivity extends AppCompatActivity {
         if (accounts != null && !accounts.isEmpty()) {
             Account loggedInAccount = accounts.get(0);
             if ("admin".equals(loggedInAccount.getRole())) {
-                // Đây là một tài khoản admin, thực hiện các hành động của admin ở đây
                 Toast.makeText(this, "Admin login successfully.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                 startActivity(intent);
             } else {
-                // Đây là một tài khoản user, thực hiện các hành động của user ở đây
                 Toast.makeText(this, "User login successfully.", Toast.LENGTH_SHORT).show();
             }
         } else {
@@ -80,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        AdminAccountInitializer.insertAdminAccount(this);
         bindingView();
         bindingAction();
     }
