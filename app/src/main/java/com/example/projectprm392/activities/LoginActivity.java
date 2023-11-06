@@ -1,16 +1,15 @@
 package com.example.projectprm392.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectprm392.Database.AccountDatabase;
 import com.example.projectprm392.R;
@@ -64,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "User login successfully.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         } else {
             Toast.makeText(this, "Account does not exist!", Toast.LENGTH_SHORT).show();

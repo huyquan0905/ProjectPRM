@@ -18,7 +18,7 @@ import com.example.projectprm392.model.Item;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
-    private List<Item> itemList;
+    public List<Item> itemList;
     private OnDeleteItemClickListener onDeleteItemClickListener;
 
     public interface OnDeleteItemClickListener {
@@ -42,11 +42,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         Item item = itemList.get(position);
         holder.bind(item);
         Log.d("MyApp", "Danh sách các mục sản phẩm:");
-//        for (Item items : itemList) {
-//            Log.d("MyApp", "Tên: " + item.getName());
-//            Log.d("MyApp", "Giá: " + item.getPrice());
-//            Log.d("MyApp", "Đường dẫn hình ảnh: " + item.getImagePath());
-//        }
+        for (Item items : itemList) {
+            Log.d("MyApp", "Tên: " + item.getName());
+            Log.d("MyApp", "Giá: " + item.getPrice());
+            Log.d("MyApp", "Đường dẫn hình ảnh: " + item.getImagePath());
+        }
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
