@@ -262,7 +262,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView4"
+        android:id="@+id/allOrder"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginTop="60dp"
@@ -291,7 +291,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit Item"
+                android:text="Order"
                 android:layout_marginTop="2dp"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@+id/editItem"
@@ -310,8 +310,8 @@
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="@+id/addItem"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/cardView4"
-        app:layout_constraintTop_toTopOf="@+id/cardView4">
+        app:layout_constraintStart_toEndOf="@+id/allOrder"
+        app:layout_constraintTop_toTopOf="@+id/allOrder">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -349,8 +349,8 @@
         android:outlineSpotShadowColor="@color/black"
         app:cardCornerRadius="15dp"
         app:cardElevation="8dp"
-        app:layout_constraintStart_toStartOf="@+id/cardView4"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4">
+        app:layout_constraintStart_toStartOf="@+id/allOrder"
+        app:layout_constraintTop_toBottomOf="@+id/allOrder">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
