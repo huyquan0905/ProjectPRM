@@ -11,7 +11,11 @@ public class AdminAccountInitializer {
         Account adminAccount = new Account("admin", "11111111");
         adminAccount.setRole("admin");
 
+        Account userAccount = new Account("users", "11111111");
+        userAccount.setRole("users");
+
         AccountDAO accountDAO = AccountDatabase.getInstance(context).accountDAO();
+        accountDAO.insertAdmin(userAccount);
         accountDAO.insertAdmin(adminAccount);
     }
 }
