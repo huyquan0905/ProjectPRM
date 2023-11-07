@@ -23,6 +23,9 @@
             android:name=".activities.Checkout_success"
             android:exported="false" />
         <activity
+            android:name=".activities.ListItem"
+            android:exported="false" />
+        <activity
             android:name=".activities.AdminOrderActivity"
             android:exported="false" />
         <activity
