@@ -54,11 +54,11 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
     }
 
-    // Hàm thực hiện đăng xuất
+    // thực hiện đăng xuất
     private void performLogout() {
         Intent intent = new Intent(AdminDashboardActivity.this, LoginActivity.class);
         startActivity(intent);
-        finish(); // Kết thúc hoạt động hiện tại
+        finish();
         Toast.makeText(this, "Đăng xuất thành công!!!", Toast.LENGTH_SHORT).show();
     }
 }

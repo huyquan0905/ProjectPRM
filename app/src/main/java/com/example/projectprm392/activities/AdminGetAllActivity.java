@@ -1,14 +1,14 @@
 package com.example.projectprm392.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectprm392.Database.ItemDatabase;
 import com.example.projectprm392.R;
@@ -37,8 +37,6 @@ public class AdminGetAllActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        // truy vấn cơ sở dữ liệu trong luồng nền (background thread)
         new LoadItemsTask().execute();
     }
 
@@ -71,7 +69,6 @@ public class AdminGetAllActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            // Cập nhật lại RecyclerView sau khi xóa
             itemAdapter.notifyDataSetChanged();
         }
     }

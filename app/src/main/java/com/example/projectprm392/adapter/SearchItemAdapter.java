@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
 
     private List<Item> itemList;
     private Context context;
+    private int selectedPosition = RecyclerView.NO_POSITION;
 
     public SearchItemAdapter(Context context, List<Item> itemList) {
         this.context = context;
@@ -34,23 +36,47 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
     public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.bind(item);
+
+        holder.itemView.setSelected(position == selectedPosition);
+
+        holder.addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int itemPosition = holder.getAdapterPosition(); // Lấy vị trí mục đã chọn
+                if (itemPosition != RecyclerView.NO_POSITION) {
+                    if (onAddButtonClickListener != null) {
+                        onAddButtonClickListener.onAddButtonClick(itemPosition);
+                    }
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return itemList.size();
     }
-
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+    public Item getSelectedItem() {
+        if (selectedPosition != RecyclerView.NO_POSITION) {
+            return itemList.get(selectedPosition);
+        }
+        return null;
+    }
     public class SearchItemViewHolder extends RecyclerView.ViewHolder {
         private TextView itemNameTextView;
         private TextView itemPriceTextView;
         private ImageView itemFoodImage;
+        private Button addButton;
 
         public SearchItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemNameTextView = itemView.findViewById(R.id.foodNameTextView);
             itemPriceTextView = itemView.findViewById(R.id.PriceTextView);
             itemFoodImage = itemView.findViewById(R.id.foodImageView);
+            addButton = itemView.findViewById(R.id.addButton);
         }
 
         public void bind(Item item) {
@@ -64,6 +90,30 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
 
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
-        notifyDataSetChanged(); // Notify the adapter that the data has changed
+        notifyDataSetChanged();
     }
+
+    public List<Item> getItemList() {
+        return itemList;
+    }
+    public void setSelectedPosition(int position) {
+        if (selectedPosition != position) {
+            int previousSelected = selectedPosition;
+            selectedPosition = position;
+            notifyItemChanged(previousSelected);
+            notifyItemChanged(selectedPosition);
+        }
+    }
+
+    public interface OnAddButtonClickListener {
+        void onAddButtonClick(int position);
+    }
+
+    private OnAddButtonClickListener onAddButtonClickListener;
+
+    public void setOnAddButtonClickListener(OnAddButtonClickListener listener) {
+        this.onAddButtonClickListener = listener;
+    }
+
+
 }

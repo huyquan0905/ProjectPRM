@@ -18,15 +18,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
 
-        // Khởi tạo NavController và kết nối với NavHostFragment
+        //tạo NavController và kết nối với NavHostFragment
         NavController navController = navHostFragment.getNavController();
 
-        // Tìm bottom navigation
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
 
         // Kết nối bottom navigation với NavController
         NavigationUI.setupWithNavController(bottomNav, navController);
     }
+
+
 
 
 }

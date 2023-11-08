@@ -33,30 +33,26 @@ public class SearchFragment extends Fragment {
         recyclerView = view.findViewById(R.id.MenuSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // Khởi tạo SearchItemAdapter cho fragment tìm kiếm nếu chưa tồn tại
         if (searchItemAdapter == null) {
             searchItemAdapter = new SearchItemAdapter(getActivity(), new ArrayList<>());
             recyclerView.setAdapter(searchItemAdapter);
         }
 
-        // Sử dụng một background thread để lấy danh sách mục sản phẩm từ cơ sở dữ liệu
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 originalItemList = ItemDatabase.getInstance(getActivity()).itemDAO().getAllItems();
 
-                // Sau khi lấy dữ liệu, cập nhật RecyclerView trên luồng giao diện
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        // Cập nhật itemList của SearchItemAdapter
                         searchItemAdapter.setItemList(originalItemList);
                     }
                 });
             }
         }).start();
 
-        // Tìm kiếm theo từ khóa khi người dùng thay đổi SearchView
         SearchView searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
