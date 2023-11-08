@@ -1,16 +1,15 @@
 package com.example.projectprm392.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projectprm392.Database.AccountDatabase;
 import com.example.projectprm392.R;
@@ -56,37 +55,19 @@ public class LoginActivity extends AppCompatActivity {
         // Kiểm tra xem tài khoản có tồn tại và lấy thông tin của tài khoản
         List<Account> accounts = AccountDatabase.getInstance(this).accountDAO().checkAccountLogin(account.getUsername(), account.getPassword());
 
-        boolean loggedIn = false;
-
-        for (Account loggedInAccount : accounts) {
+        if (accounts != null && !accounts.isEmpty()) {
+            Account loggedInAccount = accounts.get(0);
             if ("admin".equals(loggedInAccount.getRole())) {
-                // Xử lý khi người dùng đăng nhập với vai trò "admin"
                 Toast.makeText(this, "Admin login successfully.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                 startActivity(intent);
-                loggedIn = true;
-                break; // Kết thúc vòng lặp nếu là admin
-            } else if ("users".equals(loggedInAccount.getRole())) {
-                // Xử lý khi người dùng đăng nhập với vai trò "user"
+            } else {
                 Toast.makeText(this, "User login successfully.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, ListItem.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
-                loggedIn = true;
-                break; // Kết thúc vòng lặp nếu là user
             }
-            else{
-                // Xử lý khi người dùng đăng nhập với vai trò "user"
-                Toast.makeText(this, "User login successfully.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, ListItem.class);
-                startActivity(intent);
-                loggedIn = true;
-                break; // Kết thúc vòng lặp nếu là user
-            }
-        }
-
-        if (!loggedIn) {
-            // Xử lý khi không có tài khoản phù hợp
-            Toast.makeText(this, "Account does not exist or role is not defined!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Account does not exist!", Toast.LENGTH_SHORT).show();
         }
     }
 

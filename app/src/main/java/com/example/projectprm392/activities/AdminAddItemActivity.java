@@ -1,31 +1,30 @@
 package com.example.projectprm392.activities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.projectprm392.R;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.projectprm392.Database.ItemDatabase;
+import com.example.projectprm392.R;
 import com.example.projectprm392.model.Item;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import android.util.Log;
 
 public class AdminAddItemActivity extends AppCompatActivity {
     private EditText nameEditText;
@@ -48,7 +47,7 @@ public class AdminAddItemActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed(); // Sử dụng onBackPressed() để quay lại màn hình trước đó
+                onBackPressed();
             }
         });
 
@@ -94,7 +93,7 @@ public class AdminAddItemActivity extends AppCompatActivity {
                 protected void onPostExecute(Void result) {
                     super.onPostExecute(result);
                     Toast.makeText(AdminAddItemActivity.this, "Add Item susscessfully!!", Toast.LENGTH_SHORT).show();
-                    onBackPressed(); // Quay lại màn hình AdminDashboardActivity
+                    onBackPressed();
                 }
             }.execute(newItem);
         }
